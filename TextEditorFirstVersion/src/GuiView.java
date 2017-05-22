@@ -25,6 +25,7 @@ import javax.swing.DropMode;
 public class GuiView implements ApplicationView {
 	// Start of user code (user defined attributes for GuiView)
 	private JFrame frame;
+	private ApplicationController controller;
 	// End of user code
 
 	/**
@@ -34,6 +35,7 @@ public class GuiView implements ApplicationView {
 	public GuiView() {
 		// Start of user code constructor for GuiView)
 		super();
+		controller = new ApplicationController();
 		initialize();
 		// End of user code
 	}

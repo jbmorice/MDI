@@ -51,6 +51,8 @@ public class ApplicationController {
 		textBuffer.append('d');
 		textBuffer.append('e');
 		textBuffer.append('e');
+		textBuffer.replace(0,2, "toto");
+		System.out.println(textBuffer.getCharacters());
 		
 		// End of user code
 	}

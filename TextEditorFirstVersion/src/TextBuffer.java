@@ -23,6 +23,7 @@ public class TextBuffer {
 		this.startSelectionIndex = -1;
 		this.endSelectionIndex = -1;
 		this.clipboard = new Clipboard();
+		this.characters = "";
 	}
 
 	/**
@@ -40,8 +41,8 @@ public class TextBuffer {
 	 */
 	public void delete(int begin, int end) {
 		assert(begin > -1 && begin < this.characters.length());
-		CharSequence target = this.characters.subSequence(begin, end);
-		this.characters.replace(target, null);
+		
+		characters = characters.substring(0, begin) + characters.substring(end, characters.length());
 		
 	}
 
@@ -53,7 +54,7 @@ public class TextBuffer {
 	public void insert(int position, String content) {
 		int taille = characters.length();
 		
-		characters = characters.substring(0, position) + content + characters.substring(position+1, taille-1);
+		characters = characters.substring(0, position) + content + characters.substring(position, taille);
 		
 		cursorIndex += content.length(); 
 	}
@@ -67,8 +68,7 @@ public class TextBuffer {
 	public void replace(int begin, int end, String content) {
 		assert(begin > -1 && begin < this.characters.length());
 		
-		CharSequence target = this.characters.subSequence(begin, end);
-		this.characters.replace(target, content);
+		characters = characters.substring(0, begin) + content + characters.substring(end, characters.length());
 	}
 	
 	/**
