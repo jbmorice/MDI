@@ -41,6 +41,17 @@ public class ApplicationController {
 		// Start of user code constructor for ApplicationController)
 		super();
 		textBuffer = new TextBuffer();
+		textBuffer.append('a');
+		textBuffer.append('a');
+		textBuffer.append('b');
+		textBuffer.append('b');
+		textBuffer.append('c');
+		textBuffer.append('c');
+		textBuffer.append('d');
+		textBuffer.append('d');
+		textBuffer.append('e');
+		textBuffer.append('e');
+		
 		// End of user code
 	}
 
@@ -87,8 +98,7 @@ public class ApplicationController {
 	 * @param char 
 	 */
 	public void append(char newChar) {
-		// Start of user code for method append
-		// End of user code
+		textBuffer.append(newChar);
 	}
 
 	/**
