@@ -2,75 +2,27 @@
  * 2017, All rights reserved.
  *******************************************************************************/
 
-// Start of user code (user defined imports)
-
-// End of user code
-
 /**
  * Description of TextBuffer.
  * 
  * @author jean-baptiste
  */
 public class TextBuffer {
+	private int cursorIndex;
 	private int startSelectionIndex;
 	private int endSelectionIndex;
 	private String characters;
 	public Clipboard clipboard;
-	private int cursorIndex;
-
-	// Start of user code (user defined attributes for TextBuffer)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public TextBuffer() {
-		// Start of user code constructor for TextBuffer)
 		super();
-		// End of user code
-	}
-
-	/**
-	 * Description of the method setStartSelectionIndex.
-	 * @param cursorIndex 
-	 * @return 
-	 */
-	public boolean setStartSelectionIndex(int cursorIndex) {
-		// Start of user code for method setStartSelectionIndex
-		return false;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method setEndSelectionIndex.
-	 * @param cursorIndex 
-	 * @return 
-	 */
-	public boolean setEndSelectionIndex(int cursorIndex) {
-		// Start of user code for method setEndSelectionIndex
-		return false;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method getStartSelectionIndex.
-	 * @return 
-	 */
-	public int getStartSelectionIndex() {
-		// Start of user code for method getStartSelectionIndex
-		return 0;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method isSelectionSet.
-	 * @return 
-	 */
-	public boolean isSelectionSet() {
-		// Start of user code for method isSelectionSet
-		return false;
-		// End of user code
+		this.cursorIndex = 0;
+		this.startSelectionIndex = -1;
+		this.endSelectionIndex = -1;
+		this.clipboard = new Clipboard();
 	}
 
 	/**
@@ -78,8 +30,7 @@ public class TextBuffer {
 	 * @param newChar 
 	 */
 	public void append(char newChar) {
-		// Start of user code for method append
-		// End of user code
+		this.characters += newChar;
 	}
 
 	/**
@@ -88,8 +39,10 @@ public class TextBuffer {
 	 * @param end 
 	 */
 	public void delete(int begin, int end) {
-		// Start of user code for method delete
-		// End of user code
+		assert(begin > -1 && begin < this.characters.length());
+		CharSequence target = this.characters.subSequence(begin, end);
+		this.characters.replace(target, null);
+		
 	}
 
 	/**
@@ -98,8 +51,7 @@ public class TextBuffer {
 	 * @param content 
 	 */
 	public void insert(int position, String content) {
-		// Start of user code for method insert
-		// End of user code
+
 	}
 
 	/**
@@ -109,13 +61,25 @@ public class TextBuffer {
 	 * @param content 
 	 */
 	public void replace(int begin, int end, String content) {
-		// Start of user code for method replace
-		// End of user code
+
+	}
+	
+	/**
+	 * Returns cursorIndex.
+	 * @return cursorIndex 
+	 */
+	public Integer getCursorIndex() {
+		return this.cursorIndex;
 	}
 
-	// Start of user code (user defined methods for TextBuffer)
+	/**
+	 * Sets a value to attribute cursorIndex. 
+	 * @param newCursorIndex 
+	 */
+	public void setCursorIndex(Integer newCursorIndex) {
+		this.cursorIndex = newCursorIndex;
+	}
 
-	// End of user code
 	/**
 	 * Returns startSelelctionIndex.
 	 * @return startSelelctionIndex 
@@ -128,7 +92,7 @@ public class TextBuffer {
 	 * Sets a value to attribute startSelelctionIndex. 
 	 * @param newStartSelelctionIndex 
 	 */
-	public void setStartSelelctionIndex(int newStartSelelctionIndex) {
+	public void setStartSelectionIndex(int newStartSelelctionIndex) {
 		this.startSelectionIndex = newStartSelelctionIndex;
 	}
 
@@ -146,6 +110,17 @@ public class TextBuffer {
 	 */
 	public void setEndSelectionIndex(Integer newEndSelectionIndex) {
 		this.endSelectionIndex = newEndSelectionIndex;
+	}
+	
+	/**
+	 * Description of the method isSelectionSet.
+	 * @return 
+	 */
+	public boolean isSelectionSet() {
+		if(this.startSelectionIndex > -1 && this.endSelectionIndex > -1) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -177,26 +152,7 @@ public class TextBuffer {
 	 * @param newClipboard 
 	 */
 	public void setClipboard(Clipboard newClipboard) {
-//		if (this.clipboard != null) {
-//			this.clipboard.set(null);
-//		}
-//		this.clipboard.set(this);
-	}
 
-	/**
-	 * Returns cursorIndex.
-	 * @return cursorIndex 
-	 */
-	public Integer getCursorIndex() {
-		return this.cursorIndex;
-	}
-
-	/**
-	 * Sets a value to attribute cursorIndex. 
-	 * @param newCursorIndex 
-	 */
-	public void setCursorIndex(Integer newCursorIndex) {
-		this.cursorIndex = newCursorIndex;
 	}
 
 }
