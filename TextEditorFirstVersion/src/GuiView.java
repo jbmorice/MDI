@@ -9,6 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JToolBar;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JButton;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JToggleButton;
+import javax.swing.DropMode;
 // End of user code
 
 /**
@@ -19,7 +25,6 @@ import javax.swing.JTextField;
 public class GuiView implements ApplicationView {
 	// Start of user code (user defined attributes for GuiView)
 	private JFrame frame;
-	private JTextField textField;
 	// End of user code
 
 	/**
@@ -44,9 +49,39 @@ public class GuiView implements ApplicationView {
 		JToolBar toolBar = new JToolBar();
 		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
-		textField = new JTextField();
-		frame.getContentPane().add(textField, BorderLayout.CENTER);
-		textField.setColumns(10);
+		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
+		toolBar.add(horizontalStrut_3);
+		
+		JButton btn_prev = new JButton("<-");
+		toolBar.add(btn_prev);
+		
+		JButton btn_next = new JButton("->");
+		toolBar.add(btn_next);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		toolBar.add(horizontalStrut_2);
+		
+		JToggleButton btn_select = new JToggleButton("Select");
+		toolBar.add(btn_select);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		toolBar.add(horizontalStrut_1);
+		
+		JButton btn_copy = new JButton("Copy");
+		toolBar.add(btn_copy);
+		
+		JButton btn_paste = new JButton("Paste");
+		toolBar.add(btn_paste);
+		
+		JButton btn_cut = new JButton("Cut");
+		toolBar.add(btn_cut);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		toolBar.add(horizontalStrut);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setEnabled(false);
+		frame.getContentPane().add(textPane, BorderLayout.CENTER);
 	}
 
 	/**
@@ -136,6 +171,4 @@ public class GuiView implements ApplicationView {
 			}
 		});
 	}
-	// End of user code
-
 }
