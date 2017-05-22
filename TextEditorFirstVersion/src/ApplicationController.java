@@ -40,6 +40,7 @@ public class ApplicationController {
 	public ApplicationController() {
 		// Start of user code constructor for ApplicationController)
 		super();
+		textBuffer = new TextBuffer();
 		// End of user code
 	}
 
