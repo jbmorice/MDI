@@ -32,6 +32,7 @@ public class TextBuffer {
 	 */
 	public void append(char newChar) {
 		this.characters += newChar;
+		cursorIndex++;
 	}
 
 	/**
@@ -42,7 +43,15 @@ public class TextBuffer {
 	public void delete(int begin, int end) {
 		assert(begin > -1 && begin < this.characters.length());
 		
-		characters = characters.substring(0, begin) + characters.substring(end, characters.length());
+		if(begin==end)
+		{
+			characters = characters.substring(0, begin) + characters.substring(begin+1, characters.length());	
+		}
+		else
+		{
+			characters = characters.substring(0, begin) + characters.substring(end, characters.length());
+			cursorIndex = begin;
+		}
 		
 	}
 
@@ -69,6 +78,7 @@ public class TextBuffer {
 		assert(begin > -1 && begin < this.characters.length());
 		
 		characters = characters.substring(0, begin) + content + characters.substring(end, characters.length());
+		cursorIndex = end;
 	}
 	
 	/**

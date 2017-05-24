@@ -51,7 +51,8 @@ public class ApplicationController {
 		textBuffer.append('d');
 		textBuffer.append('e');
 		textBuffer.append('e');
-		textBuffer.replace(0,2, "toto");
+		textBuffer.delete(0,0);
+		
 		System.out.println(textBuffer.getCharacters());
 		
 		// End of user code
@@ -61,8 +62,7 @@ public class ApplicationController {
 	 * Description of the method moveCursorLeft.
 	 */
 	public void moveCursorLeft() {
-		// Start of user code for method moveCursorLeft
-		// End of user code
+		
 	}
 
 	/**
@@ -107,16 +107,14 @@ public class ApplicationController {
 	 * Description of the method cut.
 	 */
 	public void cut() {
-		// Start of user code for method cut
-		// End of user code
+		
 	}
 
 	/**
 	 * Description of the method paste.
 	 */
 	public void paste() {
-		// Start of user code for method paste
-		// End of user code
+		
 	}
 
 	/**
