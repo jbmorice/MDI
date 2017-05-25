@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
  */
 public class GuiView implements ApplicationView {
 	private JFrame frame;
+	private ApplicationController controller;
 
 	/**
 	 * The constructor.
@@ -34,6 +35,7 @@ public class GuiView implements ApplicationView {
 	 */
 	public GuiView() {
 		super();
+		controller = new ApplicationController();
 		initialize();
 	}
 	
@@ -87,16 +89,14 @@ public class GuiView implements ApplicationView {
 	 * Description of the method moveCursorLeft.
 	 */
 	public void moveCursorLeft() {
-		// Start of user code for method moveCursorLeft
-		// End of user code
+
 	}
 
 	/**
 	 * Description of the method moveCursorRight.
 	 */
 	public void moveCursorRight() {
-		// Start of user code for method moveCursorRight
-		// End of user code
+
 	}
 
 	/**
@@ -104,10 +104,8 @@ public class GuiView implements ApplicationView {
 	 * @return 
 	 */
 	public Integer beginSelection() {
-		// Start of user code for method beginSelection
 		Integer beginSelection = Integer.valueOf(0);
 		return beginSelection;
-		// End of user code
 	}
 
 	/**
@@ -115,10 +113,8 @@ public class GuiView implements ApplicationView {
 	 * @return 
 	 */
 	public Integer endSelection() {
-		// Start of user code for method endSelection
 		Integer endSelection = Integer.valueOf(0);
 		return endSelection;
-		// End of user code
 	}
 
 	/**
@@ -126,35 +122,30 @@ public class GuiView implements ApplicationView {
 	 * @param newChar 
 	 */
 	public void append(char newChar) {
-		// Start of user code for method append
-		// End of user code
+	
 	}
 
 	/**
 	 * Description of the method copy.
 	 */
 	public void copy() {
-		// Start of user code for method copy
-		// End of user code
+	
 	}
 
 	/**
 	 * Description of the method cut.
 	 */
 	public void cut() {
-		// Start of user code for method cut
-		// End of user code
+	
 	}
 
 	/**
 	 * Description of the method paste.
 	 */
 	public void paste() {
-		// Start of user code for method paste
-		// End of user code
+	
 	}
 
-	// Start of user code (user defined methods for GuiView)
 	/**
 	 * Launch the application.
 	 */
