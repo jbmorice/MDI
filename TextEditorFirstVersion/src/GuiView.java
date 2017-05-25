@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
+import javax.swing.text.DefaultCaret;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -15,6 +17,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JToggleButton;
 import javax.swing.DropMode;
+import javax.swing.JTextArea;
 // End of user code
 
 /**
@@ -23,19 +26,15 @@ import javax.swing.DropMode;
  * @author jean-baptiste
  */
 public class GuiView implements ApplicationView {
-	// Start of user code (user defined attributes for GuiView)
 	private JFrame frame;
-	// End of user code
 
 	/**
 	 * The constructor.
 	 * Create the application.
 	 */
 	public GuiView() {
-		// Start of user code constructor for GuiView)
 		super();
 		initialize();
-		// End of user code
 	}
 	
 	/**
@@ -80,7 +79,7 @@ public class GuiView implements ApplicationView {
 		toolBar.add(horizontalStrut);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setEnabled(false);
+		textPane.setDropMode(DropMode.ON);
 		frame.getContentPane().add(textPane, BorderLayout.CENTER);
 	}
 
