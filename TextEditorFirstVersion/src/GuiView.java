@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -27,6 +29,9 @@ public class GuiView extends ApplicationView {
 	private JTextField txtfldTextBufferContent;
 	private JTextField txtfldTextBufferAppend;
 	private JTextField txtfldClipboardContent;
+
+	private JButton btnMoveCursorLeft;
+	private JButton btnMoveCursorRight;
 	
 	private void initialize() {
 		frame = new JFrame();
@@ -111,10 +116,22 @@ public class GuiView extends ApplicationView {
 		cursorControlPanel.add(cursorControlButtonsPanel, BorderLayout.SOUTH);
 		cursorControlButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnMoveCursorLeft = new JButton("Left");
+		btnMoveCursorLeft = new JButton("Left");
+		btnMoveCursorLeft.setEnabled(false);
+		btnMoveCursorLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				applicationController.moveCursorLeft();
+			}
+		});
 		cursorControlButtonsPanel.add(btnMoveCursorLeft);
 		
-		JButton btnMoveCursorRight = new JButton("Right");
+		btnMoveCursorRight = new JButton("Right");
+		btnMoveCursorRight.setEnabled(false);
+		btnMoveCursorRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				applicationController.moveCursorRight();
+			}
+		});
 		cursorControlButtonsPanel.add(btnMoveCursorRight);
 		
 		JPanel selectionControlPanel = new JPanel();
@@ -133,9 +150,11 @@ public class GuiView extends ApplicationView {
 		selectionControlButtonsPanel.add(btnStartSelection);
 		
 		JButton btnEndSelection = new JButton("End");
+		btnEndSelection.setEnabled(false);
 		selectionControlButtonsPanel.add(btnEndSelection);
 		
 		JButton btnResetSelection = new JButton("Reset");
+		btnResetSelection.setEnabled(false);
 		selectionControlButtonsPanel.add(btnResetSelection);
 		
 		JPanel actionPanel = new JPanel();
@@ -157,15 +176,28 @@ public class GuiView extends ApplicationView {
 		actionButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnCopy = new JButton("Copy");
+		btnCopy.setEnabled(false);
 		actionButtonsPanel.add(btnCopy);
 		
 		JButton btnCut = new JButton("Cut");
+		btnCut.setEnabled(false);
 		actionButtonsPanel.add(btnCut);
 		
 		JButton btnPaste = new JButton("Paste");
+		btnPaste.setEnabled(false);
 		actionButtonsPanel.add(btnPaste);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(applicationController.isSelectionSet()) {
+					applicationController.delete(txtfldTextBufferContent.getSelectionStart(), txtfldTextBufferContent.getSelectionEnd());
+				}
+				else {
+					applicationController.delete(txtfldClipboardContent.getCaretPosition(), txtfldClipboardContent.getCaretPosition() - 1);
+				}
+			}
+		});
 		actionButtonsPanel.add(btnDelete);
 		
 		JLabel lblClipboardContent = new JLabel("Clipboard content :");
@@ -196,8 +228,20 @@ public class GuiView extends ApplicationView {
 		this.txtfldTextBufferContent.setText(bufferContent);
 	}
 	
-	public void updateClipboardContent(String clipboardContent) {
-		this.txtfldClipboardContent.setText(clipboardContent);
+	public void updateBufferIndex(int index) {
+		System.out.println("new index "+index+" / "+this.applicationController.getTextBufferLength());
+		if(index > 0){
+			this.btnMoveCursorLeft.setEnabled(true);
+		}
+		else {
+			this.btnMoveCursorLeft.setEnabled(false);			
+		}
+		if(index < this.applicationController.getTextBufferLength()) {
+			this.btnMoveCursorRight.setEnabled(true);			
+		}
+		else {
+			this.btnMoveCursorRight.setEnabled(false);
+		}
 	}
 
 	public void updateBufferStartSelectionIndex(int index) {
@@ -207,10 +251,9 @@ public class GuiView extends ApplicationView {
 	public void updateBufferEndSelectionIndex(int index) {
 		this.txtfldTextBufferContent.setSelectionEnd(index);
 	}
-
-	public void updateBufferIndex(int index) {
-		this.txtfldTextBufferContent.setCaretPosition(index);
+	
+	public void updateClipboardContent(String clipboardContent) {
+		this.txtfldClipboardContent.setText(clipboardContent);
 	}
-
 
 }
