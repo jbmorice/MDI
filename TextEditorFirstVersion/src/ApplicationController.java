@@ -1,13 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 /*******************************************************************************
  * 2017, All rights reserved.
  *******************************************************************************/
-
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of ApplicationController.
@@ -15,149 +10,98 @@ import java.util.List;
  * @author jean-baptiste
  */
 public class ApplicationController {
-	/**
-	 * Description of the property commands.
-	 */
-	public List<Command> commands = new ArrayList<Command>();
 
-	/**
-	 * Description of the property applicationView.
-	 */
-	public ApplicationView applicationView = null;
+	public TextBuffer textBuffer;
+	public HashSet<Command> commands = new HashSet<Command>();
+	public ApplicationView applicationView;
 
-	/**
-	 * Description of the property textBuffer.
-	 */
-	public TextBuffer textBuffer = null;
-
-	// Start of user code (user defined attributes for ApplicationController)
-
-	// End of user code
-
-	/**
-	 * The constructor.
-	 */
+	
 	public ApplicationController() {
-		// Start of user code constructor for ApplicationController)
 		super();
-		// End of user code
+		this.textBuffer = new TextBuffer();
+	}
+	
+	public ApplicationController(ApplicationView view) {
+		this();
+		this.setApplicationView(view);
 	}
 
-	/**
-	 * Description of the method moveCursorLeft.
-	 */
 	public void moveCursorLeft() {
-		// Start of user code for method moveCursorLeft
-		// End of user code
+		this.textBuffer.setCursorIndex(this.textBuffer.getCursorIndex() - 1);
 	}
 
-	/**
-	 * Description of the method moveCursorRight.
-	 */
 	public void moveCursorRight() {
-		// Start of user code for method moveCursorRight
-		// End of user code
+		this.textBuffer.setCursorIndex(this.textBuffer.getCursorIndex() + 1);
 	}
 
-	/**
-	 * Description of the method beginSelection.
-	 * @return 
-	 */
-	public Integer beginSelection() {
-		// Start of user code for method beginSelection
-		Integer beginSelection = Integer.valueOf(0);
-		return beginSelection;
-		// End of user code
+	public void beginSelection(int startSelectionIndex) {
+
 	}
 
-	/**
-	 * Description of the method endSelection.
-	 * @return 
-	 */
-	public Integer endSelection() {
-		// Start of user code for method endSelection
-		Integer endSelection = Integer.valueOf(0);
-		return endSelection;
-		// End of user code
+	public void endSelection(int endSelectionIndex) {
+
 	}
 
-	/**
-	 * Description of the method append.
-	 * @param char 
-	 */
-	public void append(char newChar) {
-		// Start of user code for method append
-		// End of user code
+	public void append(String text) {
+		this.getTextBuffer().append(text);
+		this.applicationView.updateBufferContent(this.textBuffer.getCharacters());
 	}
 
-	/**
-	 * Description of the method cut.
-	 */
-	public void cut() {
-		// Start of user code for method cut
-		// End of user code
+	public void delete(int begin, int end) {
+
 	}
 
-	/**
-	 * Description of the method paste.
-	 */
-	public void paste() {
-		// Start of user code for method paste
-		// End of user code
+	public void copy(int begin, int end) {
+
 	}
 
-	/**
-	 * Description of the method copy.
-	 */
-	public void copy() {
-		// Start of user code for method copy
-		// End of user code
+	public void cut(int begin, int end) {
+
 	}
 
-	// Start of user code (user defined methods for ApplicationController)
+	public void paste(int begin, int end) {
 
-	// End of user code
-	/**
-	 * Returns commands.
-	 * @return commands 
-	 */
-	public List<Command> getCommands() {
-		return this.commands;
 	}
 
-	/**
-	 * Returns applicationView.
-	 * @return applicationView 
-	 */
-	public ApplicationView getApplicationView() {
-		return this.applicationView;
-	}
-
-	/**
-	 * Sets a value to attribute applicationView. 
-	 * @param newApplicationView 
-	 */
-	public void setApplicationView(ApplicationView newApplicationView) {
-//		if (this.applicationView != null) {
-//			this.applicationView.set(null);
-//		}
-//		this.applicationView.set(this);
-	}
-
-	/**
-	 * Returns textBuffer.
-	 * @return textBuffer 
-	 */
 	public TextBuffer getTextBuffer() {
 		return this.textBuffer;
 	}
 
-	/**
-	 * Sets a value to attribute textBuffer. 
-	 * @param newTextBuffer 
-	 */
 	public void setTextBuffer(TextBuffer newTextBuffer) {
 		this.textBuffer = newTextBuffer;
+	}
+
+	public HashSet<Command> getCommands() {
+		return this.commands;
+	}
+
+	public void addCommand(Command commandToAdd) {
+		this.commands.add(commandToAdd);
+	}
+
+	public void removeCommand(Command commandToRemove) {
+		this.commands.remove(commandToRemove);
+	}
+
+	public ApplicationView getApplicationView() {
+		return this.applicationView;
+	}
+
+	public void setApplicationView(ApplicationView newApplicationView) {
+		if(newApplicationView != this.applicationView) {
+			if(this.applicationView != null) {
+				this.applicationView.setApplicationController();
+				
+			}
+
+			this.applicationView = newApplicationView;
+			this.applicationView.setApplicationController(this);
+			
+		}
+	}
+	
+	public void setApplicationView() {
+		this.applicationView = null;
 	}
 
 }

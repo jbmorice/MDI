@@ -8,151 +8,97 @@
  * @author jean-baptiste
  */
 public class TextBuffer {
+
+	private String characters;
 	private int cursorIndex;
 	private int startSelectionIndex;
 	private int endSelectionIndex;
-	private String characters;
 	public Clipboard clipboard;
 
-	/**
-	 * The constructor.
-	 */
 	public TextBuffer() {
 		super();
+		this.characters = "";
 		this.cursorIndex = 0;
 		this.startSelectionIndex = -1;
 		this.endSelectionIndex = -1;
-		this.clipboard = new Clipboard();
-	}
-
-	/**
-	 * Description of the method append.
-	 * @param newChar 
-	 */
-	public void append(char newChar) {
-		this.characters += newChar;
-	}
-
-	/**
-	 * Description of the method delete.
-	 * @param begin 
-	 * @param end 
-	 */
-	public void delete(int begin, int end) {
-		assert(begin > -1 && begin < this.characters.length());
-		CharSequence target = this.characters.subSequence(begin, end);
-		this.characters.replace(target, null);
+		this.clipboard = new Clipboard(this);
 		
 	}
 
-	/**
-	 * Description of the method insert.
-	 * @param position 
-	 * @param content 
-	 */
-	public void insert(int position, String content) {
-
+	public void append(String text) {
+		this.characters += text;
 	}
 
-	/**
-	 * Description of the method replace.
-	 * @param begin 
-	 * @param end 
-	 * @param content 
-	 */
-	public void replace(int begin, int end, String content) {
+	public void delete(int begin, int end) {
+		String newCharacters = this.characters.substring(0, begin)
+							 + this.characters.substring(end, this.characters.length() -1);
+		this.setCharacters(newCharacters);
+	}
 
+	public void insert(Integer position, String content) {
+		String newCharacters = this.characters.substring(0, position) 
+							 + content
+							 + this.characters.substring(position, this.characters.length() -1);
+		this.setCharacters(newCharacters);
+	}
+
+	public void replace(Integer begin, Integer end, String content) {
+		this.delete(begin, end);
+		this.insert(begin, content);
+	}
+
+	private void setCharacters(String newCharacters) {
+		this.characters = newCharacters;
 	}
 	
-	/**
-	 * Returns cursorIndex.
-	 * @return cursorIndex 
-	 */
-	public Integer getCursorIndex() {
+	public String getCharacters() {
+		return this.characters;
+	}
+	
+	public int getLenght() {
+		return this.characters.length();
+	}
+
+	public int getCursorIndex() {
 		return this.cursorIndex;
 	}
 
-	/**
-	 * Sets a value to attribute cursorIndex. 
-	 * @param newCursorIndex 
-	 */
-	public void setCursorIndex(Integer newCursorIndex) {
+	public void setCursorIndex(int newCursorIndex) {
 		this.cursorIndex = newCursorIndex;
 	}
-
-	/**
-	 * Returns startSelelctionIndex.
-	 * @return startSelelctionIndex 
-	 */
-	public int getStartSelelctionIndex() {
+	
+	public int getStartSelectionIndex() {
 		return this.startSelectionIndex;
 	}
 
-	/**
-	 * Sets a value to attribute startSelelctionIndex. 
-	 * @param newStartSelelctionIndex 
-	 */
-	public void setStartSelectionIndex(int newStartSelelctionIndex) {
-		this.startSelectionIndex = newStartSelelctionIndex;
+	public void setStartSelectionIndex(int newStartSelectionIndex) {
+		this.startSelectionIndex = newStartSelectionIndex;
 	}
 
-	/**
-	 * Returns endSelectionIndex.
-	 * @return endSelectionIndex 
-	 */
 	public int getEndSelectionIndex() {
 		return this.endSelectionIndex;
 	}
 
-	/**
-	 * Sets a value to attribute endSelectionIndex. 
-	 * @param newEndSelectionIndex 
-	 */
-	public void setEndSelectionIndex(Integer newEndSelectionIndex) {
+	public void setEndSelectionIndex(int newEndSelectionIndex) {
 		this.endSelectionIndex = newEndSelectionIndex;
 	}
 	
-	/**
-	 * Description of the method isSelectionSet.
-	 * @return 
-	 */
 	public boolean isSelectionSet() {
-		if(this.startSelectionIndex > -1 && this.endSelectionIndex > -1) {
+		if(this.getStartSelectionIndex() != -1 && this.getEndSelectionIndex() != -1) {
 			return true;
 		}
 		return false;
 	}
 
-	/**
-	 * Returns characters.
-	 * @return characters 
-	 */
-	public String getCharacters() {
-		return this.characters;
-	}
-
-	/**
-	 * Sets a value to attribute characters. 
-	 * @param newCharacters 
-	 */
-	public void setCharacters(String newCharacters) {
-		this.characters = newCharacters;
-	}
-
-	/**
-	 * Returns clipboard.
-	 * @return clipboard 
-	 */
 	public Clipboard getClipboard() {
 		return this.clipboard;
 	}
 
-	/**
-	 * Sets a value to attribute clipboard. 
-	 * @param newClipboard 
-	 */
 	public void setClipboard(Clipboard newClipboard) {
-
+		if (this.clipboard != null) {
+			this.clipboard.setTextBuffer(null);
+		}
+		this.clipboard.setTextBuffer(this);
 	}
 
 }

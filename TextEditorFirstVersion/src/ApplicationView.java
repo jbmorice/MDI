@@ -11,56 +11,48 @@
  * 
  * @author jean-baptiste
  */
-public interface ApplicationView {
-	// Start of user code (user defined attributes for ApplicationView)
+public abstract class ApplicationView {
 
-	// End of user code
+	public ApplicationController applicationController;
 
-	/**
-	 * Description of the method moveCursorLeft.
-	 */
-	public void moveCursorLeft();
+	public ApplicationView() {
+		super();
+	}
+	
+	public ApplicationView(ApplicationController controller) {
+		this();
+		this.setApplicationController(controller);
+	}
 
-	/**
-	 * Description of the method moveCursorRight.
-	 */
-	public void moveCursorRight();
+	public void updateBufferContent(String bufferContent) {}
 
-	/**
-	 * Description of the method beginSelection.
-	 * @return 
-	 */
-	public Integer beginSelection();
+	public void updateClipboardContent(String clipboardContent) {}
 
-	/**
-	 * Description of the method endSelection.
-	 * @return 
-	 */
-	public Integer endSelection();
+	public void updateBufferStartSelectionIndex(int index) {}
 
-	/**
-	 * Description of the method append.
-	 * @param newChar 
-	 */
-	public void append(char newChar);
+	public void updateBufferEndSelectionIndex(int index) {}
 
-	/**
-	 * Description of the method copy.
-	 */
-	public void copy();
+	public void updateBufferIndex(int index) {}
 
-	/**
-	 * Description of the method cut.
-	 */
-	public void cut();
+	public ApplicationController getApplicationController() {
+		return this.applicationController;
+	}
+	
+	public void setApplicationController(ApplicationController newApplicationController) {
+		if(newApplicationController != this.applicationController) {
+			if(this.applicationController != null) {
+				this.applicationController.setApplicationView();
+				
+			}
 
-	/**
-	 * Description of the method paste.
-	 */
-	public void paste();
+			this.applicationController = newApplicationController;
+			newApplicationController.setApplicationView(this);
+			
+		}
+	}
 
-	// Start of user code (user defined methods for ApplicationView)
-
-	// End of user code
-
+	public void setApplicationController() {
+		this.applicationController = null;
+	}
+	
 }
