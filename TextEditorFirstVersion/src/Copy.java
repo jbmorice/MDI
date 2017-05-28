@@ -1,40 +1,13 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-// Start of user code (user defined imports)
-
-// End of user code
-
-/**
- * Description of Copy.
- * 
- * @author jean-baptiste
- */
 public class Copy implements Command {
-	// Start of user code (user defined attributes for Copy)
-
-	// End of user code
-
-	/**
-	 * The constructor.
-	 */
-	public Copy() {
-		// Start of user code constructor for Copy)
-		super();
-		// End of user code
+	
+	private TextBuffer textBuffer;
+	
+	public Copy(TextBuffer textBuffer) {
+		this.textBuffer = textBuffer;
 	}
 
-	/**
-	 * Description of the method execute.
-	 */
 	public void execute() {
-		// Start of user code for method execute
-		// End of user code
+		this.textBuffer.getClipboard().setContent(this.textBuffer.getSelectionContent());
 	}
-
-	// Start of user code (user defined methods for Copy)
-
-	// End of user code
 
 }

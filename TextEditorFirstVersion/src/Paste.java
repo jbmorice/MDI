@@ -1,40 +1,24 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-// Start of user code (user defined imports)
-
-// End of user code
-
-/**
- * Description of Paste.
- * 
- * @author jean-baptiste
- */
 public class Paste implements Command {
-	// Start of user code (user defined attributes for Paste)
 
-	// End of user code
-
-	/**
-	 * The constructor.
-	 */
-	public Paste() {
-		// Start of user code constructor for Paste)
-		super();
-		// End of user code
+	private TextBuffer textBuffer;
+	
+	public Paste(TextBuffer textBuffer) {
+		this.textBuffer = textBuffer;
 	}
 
-	/**
-	 * Description of the method execute.
-	 */
 	public void execute() {
-		// Start of user code for method execute
-		// End of user code
+		if(this.textBuffer.isSelectionSet()) {
+			if(this.textBuffer.getStartSelectionPosition() < this.textBuffer.getEndSelectionPosition()){
+				this.textBuffer.replace(this.textBuffer.getStartSelectionPosition(), this.textBuffer.getEndSelectionPosition(), this.textBuffer.getClipboard().getContent());				
+			}
+			else {
+				this.textBuffer.replace(this.textBuffer.getEndSelectionPosition(), this.textBuffer.getStartSelectionPosition(), this.textBuffer.getClipboard().getContent());
+			}
+		}
+		else {
+			this.textBuffer.insert(this.textBuffer.getCaretPosition(), this.textBuffer.getClipboard().getContent());
+			this.textBuffer.setCaretPosition(this.textBuffer.getCaretPosition() + this.textBuffer.getClipboard().getContent().length());
+		}
+		this.textBuffer.resetSelection();
 	}
-
-	// Start of user code (user defined methods for Paste)
-
-	// End of user code
-
 }

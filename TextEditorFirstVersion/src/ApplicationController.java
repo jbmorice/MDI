@@ -1,9 +1,10 @@
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class ApplicationController {
 
 	private TextBuffer textBuffer;
-	private HashSet<Command> commands = new HashSet<Command>();
+	private HashMap<String, Command> commands = new HashMap<String, Command>();
 	private ApplicationView applicationView;
 
 	
@@ -17,8 +18,12 @@ public class ApplicationController {
 		this.setApplicationView(view);
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
 		this.applicationView.updateBufferIndex(this.textBuffer.getCaretPosition());
-		this.applicationView.updateBufferStartSelectionIndex(this.textBuffer.getStartSelectionIndex());
-		this.applicationView.updateBufferEndSelectionIndex(this.textBuffer.getEndSelectionIndex());
+		this.applicationView.updateBufferStartSelectionIndex(this.textBuffer.getStartSelectionPosition());
+		this.applicationView.updateBufferEndSelectionIndex(this.textBuffer.getEndSelectionPosition());
+		
+		this.commands.put("copy", new Copy(this.textBuffer));
+		this.commands.put("cut", new Cut(this.textBuffer));
+		this.commands.put("paste", new Paste(this.textBuffer));
 	}
 	
 	public void appendToTextBuffer(String text) {
@@ -54,21 +59,21 @@ public class ApplicationController {
 	}
 	
 	public void setTextBufferStartSelectionIndex(int startSelectionIndex) {
-		this.textBuffer.setStartSelectionIndex(startSelectionIndex);
+		this.textBuffer.setStartSelectionPosition(startSelectionIndex);
 		this.applicationView.updateBufferStartSelectionIndex(startSelectionIndex);
 	}
 
 	public void setTextBufferEndSelectionIndex(int endSelectionIndex) {
-		this.textBuffer.setEndSelectionIndex(endSelectionIndex);
+		this.textBuffer.setEndSelectionPosition(endSelectionIndex);
 		this.applicationView.updateBufferEndSelectionIndex(endSelectionIndex);
 	}
 	
 	public int getTextBufferStartSelectionIndex() {
-		return this.textBuffer.getStartSelectionIndex();
+		return this.textBuffer.getStartSelectionPosition();
 	}
 
 	public int getTextBufferEndSelectionIndex() {
-		return this.textBuffer.getEndSelectionIndex();
+		return this.textBuffer.getEndSelectionPosition();
 	}
 
 	public void deleteContentFromTextBuffer(int begin, int end) {
@@ -77,28 +82,29 @@ public class ApplicationController {
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
 	}
 
-	public void copy(int begin, int end) {
-
+	public void copySelectionFromTextBuffer() {
+		this.commands.get("copy").execute();
+		this.applicationView.updateClipboardContent(this.textBuffer.getClipboard().getContent());
 	}
 
-	public void cut(int begin, int end) {
-
+	public void cutSelectionFromTextBuffer() {
+		this.commands.get("cut").execute();
+		this.applicationView.updateBufferContent(this.textBuffer.getContent());
+		this.applicationView.updateBufferStartSelectionIndex(this.getTextBufferStartSelectionIndex());
+		this.applicationView.updateBufferEndSelectionIndex(this.getTextBufferEndSelectionIndex());
+		this.applicationView.updateClipboardContent(this.textBuffer.getClipboard().getContent());
 	}
 
-	public void paste(int begin, int end) {
-
+	public void pasteClipboardIntoTextBuffer() {
+		this.commands.get("paste").execute();
+		this.applicationView.updateBufferContent(this.textBuffer.getContent());
+		this.applicationView.updateBufferStartSelectionIndex(this.getTextBufferStartSelectionIndex());
+		this.applicationView.updateBufferEndSelectionIndex(this.getTextBufferEndSelectionIndex());
+		this.applicationView.updateClipboardContent(this.textBuffer.getClipboard().getContent());
 	}
 	
 	public int getTextBufferLength() {
 		return this.textBuffer.getLenght();
-	}
-
-	public HashSet<Command> getCommands() {
-		return this.commands;
-	}
-
-	public void addCommand(Command commandToAdd) {
-		this.commands.add(commandToAdd);
 	}
 
 	public void removeCommand(Command commandToRemove) {
@@ -112,7 +118,7 @@ public class ApplicationController {
 	public void setApplicationView(ApplicationView newApplicationView) {
 		if(newApplicationView != this.applicationView) {
 			if(this.applicationView != null) {
-				this.applicationView.setApplicationController();
+				this.applicationView = null;
 				
 			}
 
@@ -121,15 +127,11 @@ public class ApplicationController {
 			
 		}
 	}
-	
-	public void setApplicationView() {
-		this.applicationView = null;
-	}
 
 	public void resetTextBufferSelection() {
 		this.textBuffer.resetSelection();
-		this.applicationView.updateBufferStartSelectionIndex(this.textBuffer.getStartSelectionIndex());
-		this.applicationView.updateBufferEndSelectionIndex(this.textBuffer.getEndSelectionIndex());		
+		this.applicationView.updateBufferStartSelectionIndex(this.textBuffer.getStartSelectionPosition());
+		this.applicationView.updateBufferEndSelectionIndex(this.textBuffer.getEndSelectionPosition());		
 	}
 
 }

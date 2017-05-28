@@ -1,58 +1,15 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
+public interface ApplicationView {
 
-// Start of user code (user defined imports)
+	public void updateBufferContent(String bufferContent);
 
-// End of user code
+	public void updateClipboardContent(String clipboardContent);
 
-/**
- * Description of ApplicationView.
- * 
- * @author jean-baptiste
- */
-public abstract class ApplicationView {
+	public void updateBufferStartSelectionIndex(int index);
 
-	public ApplicationController applicationController;
+	public void updateBufferEndSelectionIndex(int index);
 
-	public ApplicationView() {
-		super();
-	}
+	public void updateBufferIndex(int index);
 	
-	public ApplicationView(ApplicationController controller) {
-		this();
-		this.setApplicationController(controller);
-	}
-
-	public void updateBufferContent(String bufferContent) {}
-
-	public void updateClipboardContent(String clipboardContent) {}
-
-	public void updateBufferStartSelectionIndex(int index) {}
-
-	public void updateBufferEndSelectionIndex(int index) {}
-
-	public void updateBufferIndex(int index) {}
-
-	public ApplicationController getApplicationController() {
-		return this.applicationController;
-	}
-	
-	public void setApplicationController(ApplicationController newApplicationController) {
-		if(newApplicationController != this.applicationController) {
-			if(this.applicationController != null) {
-				this.applicationController.setApplicationView();
-				
-			}
-
-			this.applicationController = newApplicationController;
-			newApplicationController.setApplicationView(this);
-			
-		}
-	}
-
-	public void setApplicationController() {
-		this.applicationController = null;
-	}
+	public void setApplicationController(ApplicationController controller);
 	
 }

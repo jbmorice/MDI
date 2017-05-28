@@ -2,8 +2,8 @@ public class TextBuffer {
 
 	private String content;
 	private int caretPosition;
-	private int startSelectionIndex;
-	private int endSelectionIndex;
+	private int startSelectionPosition;
+	private int endSelectionPosition;
 	private int selectionType;
 	public Clipboard clipboard;
 	
@@ -14,8 +14,8 @@ public class TextBuffer {
 		super();
 		this.content = CARET;
 		this.caretPosition = 0;
-		this.startSelectionIndex = UNSET_INDEX;
-		this.endSelectionIndex = UNSET_INDEX;
+		this.startSelectionPosition = UNSET_INDEX;
+		this.endSelectionPosition = UNSET_INDEX;
 		this.clipboard = new Clipboard(this);	
 	}
 
@@ -77,41 +77,41 @@ public class TextBuffer {
 		this.content = newContent;
 	}
 	
-	public int getStartSelectionIndex() {
-		return this.startSelectionIndex;
+	public int getStartSelectionPosition() {
+		return this.startSelectionPosition;
 	}
 
-	public void setStartSelectionIndex(int newStartSelectionIndex) {
-		this.startSelectionIndex = newStartSelectionIndex;
+	public void setStartSelectionPosition(int newStartSelectionPosition) {
+		this.startSelectionPosition = newStartSelectionPosition;
 	}
 
-	public int getEndSelectionIndex() {
-		return this.endSelectionIndex;
+	public int getEndSelectionPosition() {
+		return this.endSelectionPosition;
 	}
 
-	public void setEndSelectionIndex(int newEndSelectionIndex) {
-		this.endSelectionIndex = newEndSelectionIndex;
+	public void setEndSelectionPosition(int newEndSelectionPosition) {
+		this.endSelectionPosition = newEndSelectionPosition;
 	}
 	
 	public boolean isSelectionSet() {
-		if(this.startSelectionIndex != UNSET_INDEX && this.endSelectionIndex != UNSET_INDEX) {
+		if(this.startSelectionPosition != UNSET_INDEX && this.endSelectionPosition != UNSET_INDEX) {
 			return true;
 		}
 		return false;
 	}
 	
 	public void resetSelection() {
-		this.startSelectionIndex = this.UNSET_INDEX;
-		this.endSelectionIndex = this.UNSET_INDEX;
+		this.startSelectionPosition = this.UNSET_INDEX;
+		this.endSelectionPosition = this.UNSET_INDEX;
 	}
 	
 	public String getSelectionContent() {
-		System.out.println("start : " + this.startSelectionIndex + " end : " + this.endSelectionIndex);
-		if(this.endSelectionIndex > this.startSelectionIndex) {
-			return this.content.substring(this.startSelectionIndex, this.endSelectionIndex);
+		System.out.println("start : " + this.startSelectionPosition + " end : " + this.endSelectionPosition);
+		if(this.endSelectionPosition > this.startSelectionPosition) {
+			return this.content.substring(this.startSelectionPosition, this.endSelectionPosition);
 		}
 		else {
-			return this.content.substring(this.endSelectionIndex + 1, this.startSelectionIndex + 1);
+			return this.content.substring(this.endSelectionPosition + 1, this.startSelectionPosition + 1);
 		}
 	}
 

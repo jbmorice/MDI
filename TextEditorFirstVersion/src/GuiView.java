@@ -16,7 +16,9 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import javax.xml.soap.Text;
 
-public class GuiView extends ApplicationView {
+public class GuiView implements ApplicationView {
+	
+	private ApplicationController applicationController;
 
 	private JFrame frame;
 	private JTextField txtfldTextBufferContent;
@@ -157,6 +159,7 @@ public class GuiView extends ApplicationView {
 		selectionControlButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		btnStartSelection = new JButton("Start");
+		btnStartSelection.setEnabled(false);
 		btnStartSelection.addActionListener(new ActionListener() {
 			
 			@Override
@@ -217,14 +220,35 @@ public class GuiView extends ApplicationView {
 		actionButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		btnCopy = new JButton("Copy");
+		btnCopy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.copySelectionFromTextBuffer();				
+			}
+		});
 		btnCopy.setEnabled(false);
 		actionButtonsPanel.add(btnCopy);
 		
 		btnCut = new JButton("Cut");
+		btnCut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.cutSelectionFromTextBuffer();				
+			}
+		});
 		btnCut.setEnabled(false);
 		actionButtonsPanel.add(btnCut);
 		
 		btnPaste = new JButton("Paste");
+		btnPaste.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.pasteClipboardIntoTextBuffer();				
+			}
+		});
 		btnPaste.setEnabled(false);
 		actionButtonsPanel.add(btnPaste);
 		
@@ -255,11 +279,17 @@ public class GuiView extends ApplicationView {
 		frame.getContentPane().add(txtfldClipboardContent, gbc_txtfldClipboardContent);
 		txtfldClipboardContent.setColumns(10);
 	}
-
+	
 	public GuiView() {
 		super();
 		initialize();
 		this.frame.setVisible(true);
+	}
+	
+	
+	public GuiView(ApplicationController controller) {
+		this();
+		this.setApplicationController(controller);
 	}
 	
 	public void updateBufferContent(String bufferContent) {
@@ -274,6 +304,7 @@ public class GuiView extends ApplicationView {
 		else {
 			this.btnMoveCursorLeft.setEnabled(false);			
 		}
+		
 		if(index < this.applicationController.getTextBufferLength() - 1) {
 			this.btnMoveCursorRight.setEnabled(true);			
 		}
@@ -306,7 +337,6 @@ public class GuiView extends ApplicationView {
 			this.btnDelete.setEnabled(false);
 			this.btnCopy.setEnabled(false);
 			this.btnCut.setEnabled(false);
-			this.btnPaste.setEnabled(false);
 		}
 		else {
 			this.btnStartSelection.setEnabled(false);
@@ -317,11 +347,34 @@ public class GuiView extends ApplicationView {
 			this.btnDelete.setEnabled(true);
 			this.btnCopy.setEnabled(true);
 			this.btnCut.setEnabled(true);
-			this.btnPaste.setEnabled(true);		}
+		}
 	}
 	
 	public void updateClipboardContent(String clipboardContent) {
 		this.txtfldClipboardContent.setText(clipboardContent);
+		if(!clipboardContent.equals("")) {
+			btnPaste.setEnabled(true);
+		}
+		else {
+			btnPaste.setEnabled(false);
+		}
+	}
+	
+	public ApplicationController getApplicationController() {
+		return this.applicationController;
+	}
+	
+	public void setApplicationController(ApplicationController newApplicationController) {
+		if(newApplicationController != this.applicationController) {
+			if(this.applicationController != null) {
+				this.applicationController = null;
+				
+			}
+
+			this.applicationController = newApplicationController;
+			newApplicationController.setApplicationView(this);
+			
+		}
 	}
 
 }
