@@ -22,14 +22,21 @@ public class TextBuffer {
 	public void append(String text) {
 		String newCharacters = this.getContentWithoutCaret() + text + CARET;
 		this.content = newCharacters;
-		this.caretPosition += text.length();
+		this.caretPosition = this.content.length() - 1;
 	}
 
 	public void delete(int begin, int end) {
-		String newContent = this.getContentWithoutCaret().substring(0, begin)
-							 + this.getContentWithoutCaret().substring(end, this.content.length() -1)
-							 + CARET;
+		String newContent;
+		if(begin < end) {
+			newContent = this.content.substring(0, begin + 1)
+					 + this.content.substring(end, this.content.length() - 1);
+		}
+		else {
+			newContent = this.content.substring(0, end + 1)
+					 + this.getContentWithoutCaret().substring(begin, this.content.length() -1);
+		}
 		this.content = newContent;
+		
 	}
 
 	public void insert(Integer position, String content) {
@@ -91,6 +98,11 @@ public class TextBuffer {
 			return true;
 		}
 		return false;
+	}
+	
+	public void resetSelection() {
+		this.startSelectionIndex = this.UNSET_INDEX;
+		this.endSelectionIndex = this.UNSET_INDEX;
 	}
 	
 	public String getSelectionContent() {

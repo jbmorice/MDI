@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.xml.soap.Text;
 
 public class GuiView extends ApplicationView {
 
@@ -29,6 +30,11 @@ public class GuiView extends ApplicationView {
 	private JButton btnEndSelection;
 	private JButton btnResetSelection;
 	private JTextField txtfldSelectionContent;
+	
+	private JButton btnDelete;
+	private JButton btnCopy;
+	private JButton btnCut;
+	private JButton btnPaste;
 	
 	private void initialize() {
 		frame = new JFrame();
@@ -119,6 +125,9 @@ public class GuiView extends ApplicationView {
 		btnMoveCursorLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				applicationController.moveTextBufferCaretLeft();
+				if(applicationController.isTextBufferSelectionSet()) {
+					applicationController.resetTextBufferSelection();
+				}
 			}
 		});
 		cursorControlButtonsPanel.add(btnMoveCursorLeft);
@@ -128,6 +137,9 @@ public class GuiView extends ApplicationView {
 		btnMoveCursorRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				applicationController.moveTextBufferCaretRight();
+				if(applicationController.isTextBufferSelectionSet()) {
+					applicationController.resetTextBufferSelection();
+				}
 			}
 		});
 		cursorControlButtonsPanel.add(btnMoveCursorRight);
@@ -149,7 +161,7 @@ public class GuiView extends ApplicationView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				applicationController.beginTextBufferSelection(applicationController.getTextBufferCaretPosition());
+				applicationController.setTextBufferStartSelectionIndex(applicationController.getTextBufferCaretPosition());
 				
 			}
 		});
@@ -161,7 +173,7 @@ public class GuiView extends ApplicationView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				applicationController.endTextBufferSelection(applicationController.getTextBufferCaretPosition());
+				applicationController.setTextBufferEndSelectionIndex(applicationController.getTextBufferCaretPosition());
 				
 			}
 		});
@@ -173,10 +185,7 @@ public class GuiView extends ApplicationView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				applicationController.beginTextBufferSelection(TextBuffer.UNSET_INDEX);
-				applicationController.endTextBufferSelection(TextBuffer.UNSET_INDEX);
-				txtfldSelectionContent.setText("");
-				
+				applicationController.resetTextBufferSelection();
 			}
 		});
 		
@@ -207,27 +216,24 @@ public class GuiView extends ApplicationView {
 		actionPanel.add(actionButtonsPanel, BorderLayout.CENTER);
 		actionButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnCopy = new JButton("Copy");
+		btnCopy = new JButton("Copy");
 		btnCopy.setEnabled(false);
 		actionButtonsPanel.add(btnCopy);
 		
-		JButton btnCut = new JButton("Cut");
+		btnCut = new JButton("Cut");
 		btnCut.setEnabled(false);
 		actionButtonsPanel.add(btnCut);
 		
-		JButton btnPaste = new JButton("Paste");
+		btnPaste = new JButton("Paste");
 		btnPaste.setEnabled(false);
 		actionButtonsPanel.add(btnPaste);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
+		btnDelete.setEnabled(false);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(applicationController.isTextBufferSelectionSet()) {
-					applicationController.delete(txtfldTextBufferContent.getSelectionStart(), txtfldTextBufferContent.getSelectionEnd());
-				}
-				else {
-					applicationController.delete(txtfldClipboardContent.getCaretPosition(), txtfldClipboardContent.getCaretPosition() - 1);
-				}
+				applicationController.deleteContentFromTextBuffer(applicationController.getTextBufferStartSelectionIndex(), applicationController.getTextBufferEndSelectionIndex());
+				applicationController.resetTextBufferSelection();
 			}
 		});
 		actionButtonsPanel.add(btnDelete);
@@ -281,6 +287,7 @@ public class GuiView extends ApplicationView {
 			this.btnStartSelection.setEnabled(true);
 			this.btnEndSelection.setEnabled(false);
 			this.btnResetSelection.setEnabled(false);
+			this.txtfldSelectionContent.setText("");
 		}
 		else {
 			this.btnStartSelection.setEnabled(false);
@@ -294,13 +301,23 @@ public class GuiView extends ApplicationView {
 			this.btnStartSelection.setEnabled(true);
 			this.btnEndSelection.setEnabled(false);
 			this.btnResetSelection.setEnabled(false);
+			this.txtfldSelectionContent.setText("");
+			
+			this.btnDelete.setEnabled(false);
+			this.btnCopy.setEnabled(false);
+			this.btnCut.setEnabled(false);
+			this.btnPaste.setEnabled(false);
 		}
 		else {
 			this.btnStartSelection.setEnabled(false);
 			this.btnEndSelection.setEnabled(false);
 			this.btnResetSelection.setEnabled(true);
 			this.txtfldSelectionContent.setText(this.applicationController.getTextBufferSelectionContent());
-		}
+			
+			this.btnDelete.setEnabled(true);
+			this.btnCopy.setEnabled(true);
+			this.btnCut.setEnabled(true);
+			this.btnPaste.setEnabled(true);		}
 	}
 	
 	public void updateClipboardContent(String clipboardContent) {
