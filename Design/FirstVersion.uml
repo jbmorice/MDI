@@ -4,17 +4,21 @@
     <packageImport xmi:id="_yWQwIEJREeeVzYLpViB8Aw">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
     </packageImport>
-    <ownedAttribute xmi:id="_EQAeoBufEee8Us30rRf8FQ" name="characters" visibility="private">
+    <ownedAttribute xmi:id="_EQAeoBufEee8Us30rRf8FQ" name="content" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_RxH2EBumEee8Us30rRf8FQ" name="cursorIndex" visibility="private">
+    <ownedAttribute xmi:id="_RxH2EBumEee8Us30rRf8FQ" name="caretPosition" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_af15sBumEee8Us30rRf8FQ" name="startSelectionIndex" visibility="private">
+    <ownedAttribute xmi:id="_af15sBumEee8Us30rRf8FQ" name="startSelectionPosition" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_dwoVABumEee8Us30rRf8FQ" name="endSelectionIndex" visibility="private">
+    <ownedAttribute xmi:id="_dwoVABumEee8Us30rRf8FQ" name="endSelectionPosition" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_ddZ2UEPPEeeYE665E6Q_Eg" name="clipboard" visibility="private" type="_vkcmsBq7EeehPu7-JZvGXA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eWk6AEPPEeeYE665E6Q_Eg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eWk6AUPPEeeYE665E6Q_Eg" value="1"/>
     </ownedAttribute>
     <ownedOperation xmi:id="_uCU6gBupEee8Us30rRf8FQ" name="isSelectionSet">
       <ownedParameter xmi:id="_v6qVIBupEee8Us30rRf8FQ" direction="return">
@@ -53,38 +57,49 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_Oy8hQEJUEee85bZ6kqVzlg" name="getCharacters">
+    <ownedOperation xmi:id="_Oy8hQEJUEee85bZ6kqVzlg" name="getContent">
       <ownedParameter xmi:id="_RmEJIEJUEee85bZ6kqVzlg" name="characters" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_ZJBkQEJUEee85bZ6kqVzlg" name="getCursorIndex">
-      <ownedParameter xmi:id="_cTBbEEJUEee85bZ6kqVzlg" name="cursorIndex" direction="return">
+    <ownedOperation xmi:id="_bmaqEEPQEeeYE665E6Q_Eg" name="getContentWithoutCaret">
+      <ownedParameter xmi:id="_j6v3wEPQEeeYE665E6Q_Eg" name="content" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_iaRGIEJUEee85bZ6kqVzlg" name="setCaretPosition">
+      <ownedParameter xmi:id="_kOUdsEJUEee85bZ6kqVzlg" name="newCaretPosition">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_iaRGIEJUEee85bZ6kqVzlg" name="setCursorIndex">
-      <ownedParameter xmi:id="_kOUdsEJUEee85bZ6kqVzlg" name="newCursorIndex">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_opKRUEJUEee85bZ6kqVzlg" name="getStartSelectionIndex">
+    <ownedOperation xmi:id="_opKRUEJUEee85bZ6kqVzlg" name="getStartSelectionPosition">
       <ownedParameter xmi:id="_opKRUUJUEee85bZ6kqVzlg" name="cursorIndex" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_opKRUkJUEee85bZ6kqVzlg" name="setStartSelectionIndex">
-      <ownedParameter xmi:id="_opKRU0JUEee85bZ6kqVzlg" name="newStartSelectionIndex">
+    <ownedOperation xmi:id="_opKRUkJUEee85bZ6kqVzlg" name="setStartSelectionPosition">
+      <ownedParameter xmi:id="_opKRU0JUEee85bZ6kqVzlg" name="newStartSelectionPosition">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_w86QMkJUEee85bZ6kqVzlg" name="getEndSelectionIndex">
+    <ownedOperation xmi:id="_w86QMkJUEee85bZ6kqVzlg" name="getEndSelectionPosition">
       <ownedParameter xmi:id="_w86QM0JUEee85bZ6kqVzlg" name="cursorIndex" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_w86QMEJUEee85bZ6kqVzlg" name="setEndSelectionIndex">
-      <ownedParameter xmi:id="_w86QMUJUEee85bZ6kqVzlg" name="newEndSelectionIndex">
+    <ownedOperation xmi:id="_w86QMEJUEee85bZ6kqVzlg" name="setEndSelectionPosition">
+      <ownedParameter xmi:id="_w86QMUJUEee85bZ6kqVzlg" name="newEndSelectionPosition">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_M1Km0EPREeeYE665E6Q_Eg" name="resetSelection"/>
+    <ownedOperation xmi:id="_TqEpIEPREeeYE665E6Q_Eg" name="getSelectionContent">
+      <ownedParameter xmi:id="_d3EBkEPREeeYE665E6Q_Eg" name="content" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ZJBkQEJUEee85bZ6kqVzlg" name="getCaretPosition">
+      <ownedParameter xmi:id="_cTBbEEJUEee85bZ6kqVzlg" name="cursorIndex" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
@@ -105,6 +120,10 @@
     <ownedAttribute xmi:id="_7Mf1wBupEee8Us30rRf8FQ" name="content" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_SD3VwEPQEeeYE665E6Q_Eg" name="textBuffer" visibility="private" type="_hkQCYBq7EeehPu7-JZvGXA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SD3VwUPQEeeYE665E6Q_Eg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SD3VwkPQEeeYE665E6Q_Eg" value="1"/>
+    </ownedAttribute>
     <ownedOperation xmi:id="_MzwAUBuqEee8Us30rRf8FQ" name="getContent">
       <ownedParameter xmi:id="_N46RkBuqEee8Us30rRf8FQ" direction="return">
         <name xsi:nil="true"/>
@@ -116,26 +135,45 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation xmi:id="_1DrHkEPQEeeYE665E6Q_Eg" name="getTextBuffer">
+      <ownedParameter xmi:id="_29yq4EPQEeeYE665E6Q_Eg" name="textBuffer" type="_hkQCYBq7EeehPu7-JZvGXA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_6DLugEPQEeeYE665E6Q_Eg" name="setTextBuffer">
+      <ownedParameter xmi:id="_9PmAIEPQEeeYE665E6Q_Eg" name="textBuffer" type="_hkQCYBq7EeehPu7-JZvGXA"/>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_9vd68Bq7EeehPu7-JZvGXA" name="ApplicationController">
-    <ownedOperation xmi:id="_0ytM1j7BEeeQAsiunlBWMQ" name="moveCursorLeft"/>
-    <ownedOperation xmi:id="_0ytM1z7BEeeQAsiunlBWMQ" name="moveCursorRight"/>
-    <ownedOperation xmi:id="_0ytM1D7BEeeQAsiunlBWMQ" name="beginSelection">
+    <ownedAttribute xmi:id="_lQ_ZUEPNEeeYE665E6Q_Eg" name="textBuffer" visibility="private" type="_hkQCYBq7EeehPu7-JZvGXA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nIiw0EPNEeeYE665E6Q_Eg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nIiw0UPNEeeYE665E6Q_Eg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_wSv2kEPNEeeYE665E6Q_Eg" name="commands" visibility="private" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EMap"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5E3McEPNEeeYE665E6Q_Eg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5E3McUPNEeeYE665E6Q_Eg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_fK5IUEPOEeeYE665E6Q_Eg" name="applicationView" visibility="private" type="_AwEkoEPOEeeYE665E6Q_Eg" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hClCsEPOEeeYE665E6Q_Eg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hClCsUPOEeeYE665E6Q_Eg" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_0ytM1j7BEeeQAsiunlBWMQ" name="moveTextBufferCaretLeft"/>
+    <ownedOperation xmi:id="_0ytM1z7BEeeQAsiunlBWMQ" name="moveTextBufferCaretRight"/>
+    <ownedOperation xmi:id="_0ytM1D7BEeeQAsiunlBWMQ" name="setTextBufferStartSelectionIndex">
       <ownedParameter xmi:id="_0ytM1T7BEeeQAsiunlBWMQ" name="startSelectionIndex">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_0ytM0D7BEeeQAsiunlBWMQ" name="endSelection">
+    <ownedOperation xmi:id="_0ytM0D7BEeeQAsiunlBWMQ" name="setTextBufferEndSelectionIndex">
       <ownedParameter xmi:id="_0ytM0T7BEeeQAsiunlBWMQ" name="endSelectionIndex">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_kZklwD7CEeeQAsiunlBWMQ" name="append">
+    <ownedOperation xmi:id="_kZklwD7CEeeQAsiunlBWMQ" name="appendToTextBuffer">
       <ownedParameter xmi:id="_kZklwT7CEeeQAsiunlBWMQ" name="text">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_mbviEEJVEee85bZ6kqVzlg" name="delete">
+    <ownedOperation xmi:id="_mbviEEJVEee85bZ6kqVzlg" name="deleteContentFromTextBuffer">
       <ownedParameter xmi:id="_mbviEUJVEee85bZ6kqVzlg" name="begin">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
@@ -143,7 +181,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_SjV-0EJWEee85bZ6kqVzlg" name="copy">
+    <ownedOperation xmi:id="_SjV-0EJWEee85bZ6kqVzlg" name="copySelectionFromTextBuffer">
       <ownedParameter xmi:id="_SjV-0UJWEee85bZ6kqVzlg" name="begin">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
@@ -151,7 +189,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_T8VLAEJWEee85bZ6kqVzlg" name="cut">
+    <ownedOperation xmi:id="_T8VLAEJWEee85bZ6kqVzlg" name="cutSelectionFromTextBuffer">
       <ownedParameter xmi:id="_T8VLAUJWEee85bZ6kqVzlg" name="begin">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
@@ -159,7 +197,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation xmi:id="_XCFbAEJWEee85bZ6kqVzlg" name="paste">
+    <ownedOperation xmi:id="_XCFbAEJWEee85bZ6kqVzlg" name="pasteClipboardIntoTextBuffer">
       <ownedParameter xmi:id="_XCFbAUJWEee85bZ6kqVzlg" name="begin">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
@@ -192,12 +230,14 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_qHLbED69EeeQAsiunlBWMQ" name="GuiView">
-    <generalization xmi:id="_S8hdYEJiEee1ROV2I3bXWw" general="_4VhwoEJhEee1ROV2I3bXWw"/>
+    <generalization xmi:id="_S8hdYEJiEee1ROV2I3bXWw"/>
     <interfaceRealization xmi:id="_7wEkYD69EeeQAsiunlBWMQ" client="_qHLbED69EeeQAsiunlBWMQ"/>
+    <interfaceRealization xmi:id="_LbYQwEPOEeeYE665E6Q_Eg" client="_qHLbED69EeeQAsiunlBWMQ" supplier="_AwEkoEPOEeeYE665E6Q_Eg" contract="_AwEkoEPOEeeYE665E6Q_Eg"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_q8FCwD69EeeQAsiunlBWMQ" name="CliView">
-    <generalization xmi:id="_UVwhMEJiEee1ROV2I3bXWw" general="_4VhwoEJhEee1ROV2I3bXWw"/>
+    <generalization xmi:id="_UVwhMEJiEee1ROV2I3bXWw"/>
     <interfaceRealization xmi:id="_8WN-YD69EeeQAsiunlBWMQ" client="_q8FCwD69EeeQAsiunlBWMQ"/>
+    <interfaceRealization xmi:id="_L6AtgEPOEeeYE665E6Q_Eg" client="_q8FCwD69EeeQAsiunlBWMQ" supplier="_AwEkoEPOEeeYE665E6Q_Eg" contract="_AwEkoEPOEeeYE665E6Q_Eg"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_dy04ED6-EeeQAsiunlBWMQ" name="A_applicationControllers_textBuffers" memberEnd="_dy04ET6-EeeQAsiunlBWMQ _dy1fIj6-EeeQAsiunlBWMQ" navigableOwnedEnd="_dy1fIj6-EeeQAsiunlBWMQ">
     <ownedEnd xmi:id="_dy04ET6-EeeQAsiunlBWMQ" type="_9vd68Bq7EeehPu7-JZvGXA" association="_dy04ED6-EeeQAsiunlBWMQ">
@@ -221,41 +261,41 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_J9I_sD7BEeeQAsiunlBWMQ" value="1"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_4VhwoEJhEee1ROV2I3bXWw" name="ApplicationView" isAbstract="true">
-    <ownedOperation xmi:id="_8IV68EJhEee1ROV2I3bXWw" name="updateBufferContent">
-      <ownedParameter xmi:id="_8IV68UJhEee1ROV2I3bXWw" name="bufferContent">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_8IV68kJhEee1ROV2I3bXWw" name="updateClipboardContent">
-      <ownedParameter xmi:id="_8IV680JhEee1ROV2I3bXWw" name="clipboardContent">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_8IV69EJhEee1ROV2I3bXWw" name="updateBufferStartSelectionIndex">
-      <ownedParameter xmi:id="_8IV69UJhEee1ROV2I3bXWw" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_8IV69kJhEee1ROV2I3bXWw" name="updateBufferEndSelectionIndex">
-      <ownedParameter xmi:id="_8IV690JhEee1ROV2I3bXWw" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:id="_8IV6-EJhEee1ROV2I3bXWw" name="updateBufferIndex">
-      <ownedParameter xmi:id="_8IV6-UJhEee1ROV2I3bXWw" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
-      </ownedParameter>
-    </ownedOperation>
-  </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_CTHbIEJiEee1ROV2I3bXWw" memberEnd="_CTHbIUJiEee1ROV2I3bXWw _CTHbJEJiEee1ROV2I3bXWw" navigableOwnedEnd="_CTHbIUJiEee1ROV2I3bXWw _CTHbJEJiEee1ROV2I3bXWw">
     <ownedEnd xmi:id="_CTHbIUJiEee1ROV2I3bXWw" name="applicationController" type="_9vd68Bq7EeehPu7-JZvGXA" association="_CTHbIEJiEee1ROV2I3bXWw">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CTHbIkJiEee1ROV2I3bXWw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CTHbI0JiEee1ROV2I3bXWw" value="1"/>
     </ownedEnd>
-    <ownedEnd xmi:id="_CTHbJEJiEee1ROV2I3bXWw" name="applicationViews" type="_4VhwoEJhEee1ROV2I3bXWw" association="_CTHbIEJiEee1ROV2I3bXWw">
+    <ownedEnd xmi:id="_CTHbJEJiEee1ROV2I3bXWw" name="applicationViews" type="_AwEkoEPOEeeYE665E6Q_Eg" association="_CTHbIEJiEee1ROV2I3bXWw">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CTHbJUJiEee1ROV2I3bXWw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CTHbJkJiEee1ROV2I3bXWw" value="1"/>
     </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_AwEkoEPOEeeYE665E6Q_Eg" name="ApplicationView">
+    <ownedOperation xmi:id="_FNTk8EPOEeeYE665E6Q_Eg" name="updateBufferContent">
+      <ownedParameter xmi:id="_FNTk8UPOEeeYE665E6Q_Eg" name="bufferContent">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FNTk8kPOEeeYE665E6Q_Eg" name="updateBufferIndex">
+      <ownedParameter xmi:id="_FNTk80POEeeYE665E6Q_Eg" name="index">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FNTk9EPOEeeYE665E6Q_Eg" name="updateBufferEndSelectionIndex">
+      <ownedParameter xmi:id="_FNTk9UPOEeeYE665E6Q_Eg" name="index">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FNTk-EPOEeeYE665E6Q_Eg" name="updateBufferStartSelectionIndex">
+      <ownedParameter xmi:id="_FNTk-UPOEeeYE665E6Q_Eg" name="index">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FNTk9kPOEeeYE665E6Q_Eg" name="updateClipboardContent">
+      <ownedParameter xmi:id="_FNTk90POEeeYE665E6Q_Eg" name="clipboardContent">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
 </uml:Model>

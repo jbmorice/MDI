@@ -107,10 +107,6 @@ public class ApplicationController {
 		return this.textBuffer.getLenght();
 	}
 
-	public void removeCommand(Command commandToRemove) {
-		this.commands.remove(commandToRemove);
-	}
-
 	public ApplicationView getApplicationView() {
 		return this.applicationView;
 	}
