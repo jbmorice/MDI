@@ -11,18 +11,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-/**
- * Description of GuiView.
- * 
- * @author jean-baptiste
- */
 public class GuiView extends ApplicationView {
 
 	private JFrame frame;
@@ -33,9 +25,14 @@ public class GuiView extends ApplicationView {
 	private JButton btnMoveCursorLeft;
 	private JButton btnMoveCursorRight;
 	
+	private JButton btnStartSelection;
+	private JButton btnEndSelection;
+	private JButton btnResetSelection;
+	private JTextField txtfldSelectionContent;
+	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 513, 224);
+		frame.setBounds(100, 100, 630, 237);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{152, 213, 80, 0};
@@ -61,6 +58,7 @@ public class GuiView extends ApplicationView {
 		gbc_txtfldTextBufferContent.gridy = 0;
 		frame.getContentPane().add(txtfldTextBufferContent, gbc_txtfldTextBufferContent);
 		txtfldTextBufferContent.setColumns(10);
+//		txtfldTextBufferContent.setSelectionColor(new Color(0, 0, 1));
 		
 		JLabel lblTextBufferAppend = new JLabel("Type something :");
 		GridBagConstraints gbc_lblTextBufferAppend = new GridBagConstraints();
@@ -83,7 +81,7 @@ public class GuiView extends ApplicationView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				applicationController.append(txtfldTextBufferAppend.getText());
+				applicationController.appendToTextBuffer(txtfldTextBufferAppend.getText());
 				txtfldTextBufferAppend.setText("");
 				
 			}
@@ -120,7 +118,7 @@ public class GuiView extends ApplicationView {
 		btnMoveCursorLeft.setEnabled(false);
 		btnMoveCursorLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				applicationController.moveCursorLeft();
+				applicationController.moveTextBufferCaretLeft();
 			}
 		});
 		cursorControlButtonsPanel.add(btnMoveCursorLeft);
@@ -129,7 +127,7 @@ public class GuiView extends ApplicationView {
 		btnMoveCursorRight.setEnabled(false);
 		btnMoveCursorRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				applicationController.moveCursorRight();
+				applicationController.moveTextBufferCaretRight();
 			}
 		});
 		cursorControlButtonsPanel.add(btnMoveCursorRight);
@@ -146,15 +144,49 @@ public class GuiView extends ApplicationView {
 		selectionControlPanel.add(selectionControlButtonsPanel, BorderLayout.SOUTH);
 		selectionControlButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnStartSelection = new JButton("Start");
+		btnStartSelection = new JButton("Start");
+		btnStartSelection.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.beginTextBufferSelection(applicationController.getTextBufferCaretPosition());
+				
+			}
+		});
 		selectionControlButtonsPanel.add(btnStartSelection);
 		
-		JButton btnEndSelection = new JButton("End");
+		btnEndSelection = new JButton("End");
 		btnEndSelection.setEnabled(false);
+		btnEndSelection.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.endTextBufferSelection(applicationController.getTextBufferCaretPosition());
+				
+			}
+		});
 		selectionControlButtonsPanel.add(btnEndSelection);
 		
-		JButton btnResetSelection = new JButton("Reset");
+		btnResetSelection = new JButton("Reset");
 		btnResetSelection.setEnabled(false);
+		btnResetSelection.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applicationController.beginTextBufferSelection(TextBuffer.UNSET_INDEX);
+				applicationController.endTextBufferSelection(TextBuffer.UNSET_INDEX);
+				txtfldSelectionContent.setText("");
+				
+			}
+		});
+		
+		JLabel lblSelectionContent = new JLabel("Content : ");
+		selectionControlButtonsPanel.add(lblSelectionContent);
+		
+		txtfldSelectionContent = new JTextField();
+		txtfldSelectionContent.setEditable(false);
+		selectionControlButtonsPanel.add(txtfldSelectionContent);
+		txtfldSelectionContent.setColumns(10);
 		selectionControlButtonsPanel.add(btnResetSelection);
 		
 		JPanel actionPanel = new JPanel();
@@ -190,7 +222,7 @@ public class GuiView extends ApplicationView {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(applicationController.isSelectionSet()) {
+				if(applicationController.isTextBufferSelectionSet()) {
 					applicationController.delete(txtfldTextBufferContent.getSelectionStart(), txtfldTextBufferContent.getSelectionEnd());
 				}
 				else {
@@ -229,14 +261,14 @@ public class GuiView extends ApplicationView {
 	}
 	
 	public void updateBufferIndex(int index) {
-		System.out.println("new index "+index+" / "+this.applicationController.getTextBufferLength());
+		System.out.println("new index " + index + "/" + (this.applicationController.getTextBufferLength() - 1));
 		if(index > 0){
 			this.btnMoveCursorLeft.setEnabled(true);
 		}
 		else {
 			this.btnMoveCursorLeft.setEnabled(false);			
 		}
-		if(index < this.applicationController.getTextBufferLength()) {
+		if(index < this.applicationController.getTextBufferLength() - 1) {
 			this.btnMoveCursorRight.setEnabled(true);			
 		}
 		else {
@@ -245,11 +277,30 @@ public class GuiView extends ApplicationView {
 	}
 
 	public void updateBufferStartSelectionIndex(int index) {
-		this.txtfldTextBufferContent.setSelectionStart(index);
+		if(index == TextBuffer.UNSET_INDEX) {
+			this.btnStartSelection.setEnabled(true);
+			this.btnEndSelection.setEnabled(false);
+			this.btnResetSelection.setEnabled(false);
+		}
+		else {
+			this.btnStartSelection.setEnabled(false);
+			this.btnEndSelection.setEnabled(true);
+		}
+		
 	}
 
 	public void updateBufferEndSelectionIndex(int index) {
-		this.txtfldTextBufferContent.setSelectionEnd(index);
+		if(index == TextBuffer.UNSET_INDEX) {
+			this.btnStartSelection.setEnabled(true);
+			this.btnEndSelection.setEnabled(false);
+			this.btnResetSelection.setEnabled(false);
+		}
+		else {
+			this.btnStartSelection.setEnabled(false);
+			this.btnEndSelection.setEnabled(false);
+			this.btnResetSelection.setEnabled(true);
+			this.txtfldSelectionContent.setText(this.applicationController.getTextBufferSelectionContent());
+		}
 	}
 	
 	public void updateClipboardContent(String clipboardContent) {

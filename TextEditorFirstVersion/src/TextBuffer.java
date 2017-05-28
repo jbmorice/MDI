@@ -1,50 +1,43 @@
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-/**
- * Description of TextBuffer.
- * 
- * @author jean-baptiste
- */
 public class TextBuffer {
 
-	private String characters;
-	private int cursorIndex;
+	private String content;
+	private int caretPosition;
 	private int startSelectionIndex;
 	private int endSelectionIndex;
+	private int selectionType;
 	public Clipboard clipboard;
 	
 	private static final String CARET = "‸";
+	public static final int UNSET_INDEX = -1;
 
 	public TextBuffer() {
 		super();
-		this.characters = CARET;
-		this.cursorIndex = 0;
-		this.startSelectionIndex = -1;
-		this.endSelectionIndex = -1;
+		this.content = CARET;
+		this.caretPosition = 0;
+		this.startSelectionIndex = UNSET_INDEX;
+		this.endSelectionIndex = UNSET_INDEX;
 		this.clipboard = new Clipboard(this);	
 	}
 
 	public void append(String text) {
 		String newCharacters = this.getContentWithoutCaret() + text + CARET;
-		this.characters = newCharacters;
-		this.cursorIndex += text.length();
+		this.content = newCharacters;
+		this.caretPosition += text.length();
 	}
 
 	public void delete(int begin, int end) {
-		String newCharacters = this.getContentWithoutCaret().substring(0, begin)
-							 + this.getContentWithoutCaret().substring(end, this.characters.length() -1)
+		String newContent = this.getContentWithoutCaret().substring(0, begin)
+							 + this.getContentWithoutCaret().substring(end, this.content.length() -1)
 							 + CARET;
-		this.characters = newCharacters;
+		this.content = newContent;
 	}
 
 	public void insert(Integer position, String content) {
-		String newCharacters = this.getContentWithoutCaret().substring(0, position) 
+		String newContent = this.getContentWithoutCaret().substring(0, position) 
 							 + content
 							 + CARET
-							 + this.getContentWithoutCaret().substring(position, this.characters.length() -1);
-		this.characters = newCharacters;
+							 + this.getContentWithoutCaret().substring(position, this.content.length() -1);
+		this.content = newContent;
 	}
 
 	public void replace(Integer begin, Integer end, String content) {
@@ -53,29 +46,28 @@ public class TextBuffer {
 	}
 	
 	private String getContentWithoutCaret() {
-		return this.characters.replace(CARET, "");
+		return this.content.replace(CARET, "");
 	}
 	
 	public String getContent() {
-		return this.characters;
+		return this.content;
 	}
 	
 	public int getLenght() {
-		return this.getContentWithoutCaret().length();
+		return this.getContent().length();
 	}
 
-	public int getCursorIndex() {
-		return this.cursorIndex;
+	public int getCaretPosition() {
+		return this.caretPosition;
 	}
 
-	public void setCursorIndex(int newCursorIndex) {
-		assert(newCursorIndex >= 0 && newCursorIndex < this.getLenght());
-		this.cursorIndex = newCursorIndex;
-		String newCharacters = this.getContentWithoutCaret().substring(0, newCursorIndex)
+	public void setCaretPosition(int newPosition) {
+		assert(newPosition >= 0 && newPosition < this.getLenght());
+		this.caretPosition = newPosition;
+		String newContent = this.getContentWithoutCaret().substring(0, newPosition)
 							 + CARET
-							 + this.getContentWithoutCaret().substring(newCursorIndex, this.characters.length() - 1);
-		this.characters = newCharacters;
-		System.out.println("cursor index "+this.cursorIndex);
+							 + this.getContentWithoutCaret().substring(newPosition, this.content.length() - 1);
+		this.content = newContent;
 	}
 	
 	public int getStartSelectionIndex() {
@@ -95,10 +87,20 @@ public class TextBuffer {
 	}
 	
 	public boolean isSelectionSet() {
-		if(this.getStartSelectionIndex() != -1 && this.getEndSelectionIndex() != -1) {
+		if(this.startSelectionIndex != UNSET_INDEX && this.endSelectionIndex != UNSET_INDEX) {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getSelectionContent() {
+		System.out.println("start : " + this.startSelectionIndex + " end : " + this.endSelectionIndex);
+		if(this.endSelectionIndex > this.startSelectionIndex) {
+			return this.content.substring(this.startSelectionIndex, this.endSelectionIndex);
+		}
+		else {
+			return this.content.substring(this.endSelectionIndex + 1, this.startSelectionIndex + 1);
+		}
 	}
 
 	public Clipboard getClipboard() {

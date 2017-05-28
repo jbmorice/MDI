@@ -1,14 +1,5 @@
 import java.util.HashSet;
 
-/*******************************************************************************
- * 2017, All rights reserved.
- *******************************************************************************/
-
-/**
- * Description of ApplicationController.
- * 
- * @author jean-baptiste
- */
 public class ApplicationController {
 
 	private TextBuffer textBuffer;
@@ -25,40 +16,50 @@ public class ApplicationController {
 		this();
 		this.setApplicationView(view);
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
-		this.applicationView.updateBufferIndex(this.textBuffer.getCursorIndex());
+		this.applicationView.updateBufferIndex(this.textBuffer.getCaretPosition());
 		this.applicationView.updateBufferStartSelectionIndex(this.textBuffer.getStartSelectionIndex());
 		this.applicationView.updateBufferEndSelectionIndex(this.textBuffer.getEndSelectionIndex());
 	}
 	
-	public void append(String text) {
+	public void appendToTextBuffer(String text) {
 		this.textBuffer.append(text);
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
-		this.applicationView.updateBufferIndex(this.textBuffer.getCursorIndex());
+		this.applicationView.updateBufferIndex(this.textBuffer.getCaretPosition());
 	}
 
-	public void moveCursorLeft() {
-		assert(this.textBuffer.getCursorIndex() - 1 >= 0);
-		this.textBuffer.setCursorIndex(this.textBuffer.getCursorIndex() - 1);
-		this.applicationView.updateBufferIndex(this.textBuffer.getCursorIndex());
+	public void moveTextBufferCaretLeft() {
+		assert(this.textBuffer.getCaretPosition() - 1 >= 0);
+		this.textBuffer.setCaretPosition(this.textBuffer.getCaretPosition() - 1);
+		this.applicationView.updateBufferIndex(this.textBuffer.getCaretPosition());
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
 	}
 
-	public void moveCursorRight() {
-		assert(this.textBuffer.getCursorIndex() + 1 < this.textBuffer.getLenght());
-		this.textBuffer.setCursorIndex(this.textBuffer.getCursorIndex() + 1);
-		this.applicationView.updateBufferIndex(this.textBuffer.getCursorIndex());
+	public void moveTextBufferCaretRight() {
+		assert(this.textBuffer.getCaretPosition() + 1 < this.textBuffer.getLenght());
+		this.textBuffer.setCaretPosition(this.textBuffer.getCaretPosition() + 1);
+		this.applicationView.updateBufferIndex(this.textBuffer.getCaretPosition());
 		this.applicationView.updateBufferContent(this.textBuffer.getContent());
-	}
-
-	public void beginSelection(int startSelectionIndex) {
-
-	}
-
-	public void endSelection(int endSelectionIndex) {
-
 	}
 	
-	public boolean isSelectionSet() {
+	public int getTextBufferCaretPosition() {
+		return this.textBuffer.getCaretPosition();
+	}
+
+	public void beginTextBufferSelection(int startSelectionIndex) {
+		this.textBuffer.setStartSelectionIndex(startSelectionIndex);
+		this.applicationView.updateBufferStartSelectionIndex(startSelectionIndex);
+	}
+
+	public void endTextBufferSelection(int endSelectionIndex) {
+		this.textBuffer.setEndSelectionIndex(endSelectionIndex);
+		this.applicationView.updateBufferEndSelectionIndex(endSelectionIndex);
+	}
+	
+	public String getTextBufferSelectionContent() {
+		return this.textBuffer.getSelectionContent();
+	}
+	
+	public boolean isTextBufferSelectionSet() {
 		return this.textBuffer.isSelectionSet();
 	}
 
@@ -81,15 +82,6 @@ public class ApplicationController {
 	public int getTextBufferLength() {
 		return this.textBuffer.getLenght();
 	}
-/*
-	public TextBuffer getTextBuffer() {
-		return this.textBuffer;
-	}
-
-	public void setTextBuffer(TextBuffer newTextBuffer) {
-		this.textBuffer = newTextBuffer;
-	}
-*/
 
 	public HashSet<Command> getCommands() {
 		return this.commands;
