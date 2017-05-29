@@ -354,11 +354,27 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Q_fDcUPXEeeRubxhakY4Bg" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Q_fDckPXEeeRubxhakY4Bg" value="1"/>
     </ownedAttribute>
-    <ownedOperation xmi:id="_J9mxkEPWEeeRubxhakY4Bg" name="addMemento">
+    <ownedAttribute xmi:id="_L7MBIEPtEeedP_x7Mwgjlw" name="position" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_J9mxkEPWEeeRubxhakY4Bg" name="add">
       <ownedParameter xmi:id="_a7wUwEPWEeeRubxhakY4Bg" name="memento" type="_p5CeUEPUEeeRubxhakY4Bg"/>
     </ownedOperation>
-    <ownedOperation xmi:id="_Mu08AEPWEeeRubxhakY4Bg" name="getMemento">
+    <ownedOperation xmi:id="_Mu08AEPWEeeRubxhakY4Bg" name="getNext">
       <ownedParameter xmi:id="_Q3_w0EPWEeeRubxhakY4Bg" name="memento" type="_p5CeUEPUEeeRubxhakY4Bg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_rT6M8EPsEeedP_x7Mwgjlw" name="getPrevious">
+      <ownedParameter xmi:id="_rT6M8UPsEeedP_x7Mwgjlw" name="memento" type="_p5CeUEPUEeeRubxhakY4Bg" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Qq-xEEPtEeedP_x7Mwgjlw" name="isNextPossible">
+      <ownedParameter xmi:id="_Qq-xEUPtEeedP_x7Mwgjlw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_SbY-wEPtEeedP_x7Mwgjlw" name="isPreviousPossible">
+      <ownedParameter xmi:id="_SbY-wUPtEeedP_x7Mwgjlw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_9tX5kEPWEeeRubxhakY4Bg" memberEnd="_9tX5kUPWEeeRubxhakY4Bg _9tbj8EPWEeeRubxhakY4Bg" navigableOwnedEnd="_9tbj8EPWEeeRubxhakY4Bg">
@@ -381,6 +397,34 @@
     <ownedEnd xmi:id="_NbQHs0PXEeeRubxhakY4Bg" name="textBufferMementos" type="_p5CeUEPUEeeRubxhakY4Bg" association="_NbPgoEPXEeeRubxhakY4Bg">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NbQHtEPXEeeRubxhakY4Bg"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NbQuwEPXEeeRubxhakY4Bg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_50sO0EQ5EeeCJ8wMqsg22Q" name="ActionWriter">
+    <ownedOperation xmi:id="_EEpbsEQ6EeeCJ8wMqsg22Q" name="write"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__X8cAEQ5EeeCJ8wMqsg22Q" name="ActionReader">
+    <ownedOperation xmi:id="_DDxNgEQ6EeeCJ8wMqsg22Q" name="read"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_H8poAEQ6EeeCJ8wMqsg22Q" memberEnd="_H8poAUQ6EeeCJ8wMqsg22Q _H8rdMkQ6EeeCJ8wMqsg22Q" navigableOwnedEnd="_H8rdMkQ6EeeCJ8wMqsg22Q">
+    <ownedEnd xmi:id="_H8poAUQ6EeeCJ8wMqsg22Q" type="_9vd68Bq7EeehPu7-JZvGXA" association="_H8poAEQ6EeeCJ8wMqsg22Q">
+      <name xsi:nil="true"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H8rdMEQ6EeeCJ8wMqsg22Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H8rdMUQ6EeeCJ8wMqsg22Q"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_H8rdMkQ6EeeCJ8wMqsg22Q" name="actionWriter" type="_50sO0EQ5EeeCJ8wMqsg22Q" association="_H8poAEQ6EeeCJ8wMqsg22Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H8sEQEQ6EeeCJ8wMqsg22Q" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H8sEQUQ6EeeCJ8wMqsg22Q" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_IlwPYEQ6EeeCJ8wMqsg22Q" memberEnd="_IlwPYUQ6EeeCJ8wMqsg22Q _Ilw2cUQ6EeeCJ8wMqsg22Q" navigableOwnedEnd="_Ilw2cUQ6EeeCJ8wMqsg22Q">
+    <ownedEnd xmi:id="_IlwPYUQ6EeeCJ8wMqsg22Q" type="_9vd68Bq7EeehPu7-JZvGXA" association="_IlwPYEQ6EeeCJ8wMqsg22Q">
+      <name xsi:nil="true"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IlwPYkQ6EeeCJ8wMqsg22Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ilw2cEQ6EeeCJ8wMqsg22Q"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Ilw2cUQ6EeeCJ8wMqsg22Q" name="actionReader" type="__X8cAEQ5EeeCJ8wMqsg22Q" association="_IlwPYEQ6EeeCJ8wMqsg22Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ilw2ckQ6EeeCJ8wMqsg22Q" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IlxdgEQ6EeeCJ8wMqsg22Q" value="1"/>
     </ownedEnd>
   </packagedElement>
 </uml:Model>
