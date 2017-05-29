@@ -33,7 +33,7 @@ public class TextBufferCaretaker {
     }
 	
 	public boolean isNextPossible() {
-		if(this.position + 1 < mementos.size() - 1)
+		if(this.position < mementos.size() - 1)
 			return true;
 		return false;
 	}

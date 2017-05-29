@@ -84,7 +84,7 @@ public class GuiView implements ApplicationView {
 		frame.getContentPane().add(txtfldTextBufferAppend, gbc_txtfldTextBufferAppend);
 		txtfldTextBufferAppend.setColumns(10);
 		
-		JButton btnTextBufferAppend = new JButton("Add");
+		JButton btnTextBufferAppend = new JButton("Append");
 		btnTextBufferAppend.addActionListener(new ActionListener() {
 			
 			@Override
@@ -286,7 +286,9 @@ public class GuiView implements ApplicationView {
 		this.frame.setVisible(true);
 	}
 	
-	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public GuiView(ApplicationController controller) {
 		this();
 		this.setApplicationController(controller);

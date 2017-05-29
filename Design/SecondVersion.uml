@@ -213,6 +213,8 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation xmi:id="_-AxlAERKEeeCJ8wMqsg22Q" name="undo"/>
+    <ownedOperation xmi:id="__U8ioERKEeeCJ8wMqsg22Q" name="redo"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_4GZLABuqEee8Us30rRf8FQ" memberEnd="_4GZLARuqEee8Us30rRf8FQ _4GZLBBuqEee8Us30rRf8FQ" navigableOwnedEnd="_4GZLARuqEee8Us30rRf8FQ _4GZLBBuqEee8Us30rRf8FQ">
     <name xsi:nil="true"/>

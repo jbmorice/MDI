@@ -17,8 +17,9 @@ public class Paste implements Command {
 		}
 		else {
 			this.textBuffer.insert(this.textBuffer.getCaretPosition(), this.textBuffer.getClipboard().getContent());
-			this.textBuffer.setCaretPosition(this.textBuffer.getCaretPosition() + this.textBuffer.getClipboard().getContent().length());
+			
 		}
+		this.textBuffer.setCaretPosition(this.textBuffer.getCaretPosition() + this.textBuffer.getClipboard().getContent().length());
 		this.textBuffer.resetSelection();
 	}
 }

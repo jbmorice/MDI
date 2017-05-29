@@ -48,8 +48,10 @@ public class TextBuffer {
 	}
 
 	public void replace(Integer begin, Integer end, String content) {
+
 		this.delete(begin, end);
 		this.insert(begin, content);
+
 	}
 	
 	private String getContentWithoutCaret() {
