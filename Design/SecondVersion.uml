@@ -280,6 +280,7 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_AwEkoEPOEeeYE665E6Q_Eg" name="ApplicationView">
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_GoLS8EQ7EeeCJ8wMqsg22Q" name="ActionWriter"/>
     <ownedOperation xmi:id="_FNTk8EPOEeeYE665E6Q_Eg" name="updateBufferContent">
       <ownedParameter xmi:id="_FNTk8UPOEeeYE665E6Q_Eg" name="bufferContent">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -303,6 +304,11 @@
     <ownedOperation xmi:id="_FNTk9kPOEeeYE665E6Q_Eg" name="updateClipboardContent">
       <ownedParameter xmi:id="_FNTk90POEeeYE665E6Q_Eg" name="clipboardContent">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Iw7vMEQ7EeeCJ8wMqsg22Q" name="setApplicationController">
+      <ownedParameter xmi:id="_QJyMEEQ7EeeCJ8wMqsg22Q" name="applicationController">
+        <type xmi:type="uml:Class" href="FirstVersion.uml#_9vd68Bq7EeehPu7-JZvGXA"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
